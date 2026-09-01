@@ -1,0 +1,486 @@
+/* ===========================================================
+   顏色設定 —— 想改配色只要動這一區，整頁都會跟著變
+   （色碼取自個人網站 liaojimmy05.github.io/lcc/web）
+   =========================================================== */
+:root{
+  --ink:      #4c4c6d;   /* 深紫灰：內文、標題 */
+  --purple:   #6a0dad;   /* 主紫：重點色 */
+  --hero:     #eee8f7;   /* hero 底色（同個人網站左欄） */
+  --paper:    #f4f1f8;   /* 頁面底色 */
+  --card:     #ffffff;   /* 卡片底色 */
+  --line:     #d8cfe8;   /* 邊框線 */
+  --soft:     #d8c8f0;   /* 淺紫點綴、focus 外框 */
+  --muted:    #7a7391;   /* 次要文字 */
+  --radius:   18px;      /* 圓角大小 */
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;scrollbar-gutter:stable;}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Noto Serif TC", Georgia, serif;
+  font-size:17px;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3{font-family:"Noto Sans TC", system-ui, sans-serif;}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+
+/* ===========================================================
+   Hero（左圖 + 中文字 + 右圖 + 連結欄）
+   =========================================================== */
+.hero{
+  background:var(--hero);
+  color:var(--ink);
+  border-bottom:1px solid var(--line);
+}
+
+.hero-inner{
+  position:relative;      /* 給連結欄定位用 */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:36px;
+  padding:64px 24px 56px;
+  max-width:1180px;
+  margin:0 auto;
+}
+
+/* 中間文字區 */
+.hero-text{
+  flex:1 1 auto;
+  text-align:center;
+  min-width:0;
+}
+
+.hero h1{
+  font-weight:900;
+  font-size:clamp(56px,11vw,104px);
+  letter-spacing:-.03em;
+  line-height:.95;
+  margin:0 0 18px;
+  color:var(--purple);
+}
+
+.hero p{
+  margin:0 auto;
+  max-width:34em;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.9;
+}
+
+.hero .marks{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:26px;
+}
+
+.mark{
+  font-family:"Noto Sans TC",sans-serif;
+  font-size:13px;
+  font-weight:500;
+  padding:5px 13px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid var(--line);
+  color:var(--purple);
+}
+
+/* 左右兩側的圖片。白底的圖包成白卡片，
+   跟下面的影片卡同一套視覺，白底就不會看起來像沒去背 */
+.mascot{
+  flex:0 1 auto;
+  width:400px;
+  max-width:32%;
+  height:auto;
+  display:block;
+  background:#fff;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+/* 最右側的連結欄。用絕對定位浮著，不佔中間三塊的空間。
+   right 數字越小越靠右，可以用負值推到 hero-inner 外面 */
+.hero-links{
+  position:absolute;
+  right:-150px;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.hero-links a{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 14px;
+  font-family:"Noto Sans TC",sans-serif;
+  font-size:14px;
+  font-weight:500;
+  text-decoration:none;
+  white-space:nowrap;
+  color:var(--purple);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:999px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  transition:background .3s, color .3s;
+}
+
+.hero-links a:hover{background:var(--purple);color:#fff;}
+.hero-links a:focus-visible{outline:3px solid var(--soft);outline-offset:2px;}
+.hero-links svg{width:18px;height:18px;display:block;flex:0 0 auto;}
+
+@media(max-width:900px){
+  .mascot{width:200px;}
+}
+
+/* 手機版：左邊那張收起來，右邊那張縮小放到文字下面，連結欄改橫排 */
+@media(max-width:760px){
+  .hero-inner{
+    flex-direction:column;
+    align-items:center;
+    padding:48px 24px 44px;
+    gap:28px;
+  }
+  .mascot-left{display:none;}
+  .mascot{width:60%;max-width:240px;}
+  .hero-links{
+    position:static;
+    transform:none;
+    flex-direction:row;
+  }
+}
+
+
+/* ===========================================================
+   在 hero 底線上跑來跑去的小裝飾
+   ---------------------------------------------------------
+   不想要的話：刪掉 index.html 裡的 .runner-track 那個 div，
+   這一整段 CSS 留著不影響，想清乾淨也可以一起刪。
+
+   height 和 margin-top 要保持同一個數字，
+   改動的話兩邊一起改，不然會產生空隙或重疊
+   =========================================================== */
+.runner-track{
+  position:relative;
+  height:56px;
+  margin-top:-56px;      /* 往上疊回 hero 裡，讓小東西站在線上 */
+  max-width:1180px;      /* 跟 .hero-inner 同寬 */
+  margin-left:auto;      /* 置中，起訖點才會對齊左右兩張圖 */
+  margin-right:auto;
+  padding:0 24px;        /* 跟 .hero-inner 的左右內距一致 */
+  overflow:hidden;
+  pointer-events:none;   /* 不擋滑鼠 */
+  z-index:2;
+}
+
+.runner{
+  position:absolute;
+  left:24px;             /* 起點：左邊圖片的左緣 */
+  bottom:5px;            /* 數字越大離線越遠 */
+  line-height:0;
+}
+
+.runner-art{
+  display:block;
+  width:auto;
+  will-change:transform;
+}
+
+/* 每隻的大小分開調，因為鯊魚是橫的、另外兩隻是直的 */
+.art-shark{height:30px;}
+.art-bear {height:38px;}
+.art-chub {height:38px;}
+
+/* 速度統一，靠 delay 錯開位置。30 秒切成六等分＝每隔 5 秒一隻。
+   想更慢就把六個 30s 一起改大，delay 也要等比放大 */
+.runner-1{animation:runAcross 30s linear infinite;}
+.runner-2{animation:runAcross 30s linear infinite;animation-delay:-5s;}
+.runner-3{animation:runAcross 30s linear infinite;animation-delay:-10s;}
+.runner-4{animation:runAcross 30s linear infinite;animation-delay:-15s;}
+.runner-5{animation:runAcross 30s linear infinite;animation-delay:-20s;}
+.runner-6{animation:runAcross 30s linear infinite;animation-delay:-25s;}
+
+/* 一邊跑一邊上下晃，看起來像在走路 */
+.runner-1 .runner-art,
+.runner-2 .runner-art,
+.runner-3 .runner-art,
+.runner-4 .runner-art,
+.runner-5 .runner-art,
+.runner-6 .runner-art{animation:bob .55s ease-in-out infinite alternate;}
+
+/* 從左圖下方淡入、走到右邊淡出，銜接才不會突兀 */
+@keyframes runAcross{
+  0%   {transform:translateX(0);opacity:0;}
+  6%   {opacity:1;}
+  94%  {opacity:1;}
+  100% {transform:translateX(calc(1132px - 100%));opacity:0;}
+}
+
+@keyframes bob{
+  from{transform:translateY(0);}
+  to{transform:translateY(-4px);}
+}
+
+
+/* ===========================================================
+   作品區外框（給右側人偶定位用）
+   =========================================================== */
+.stage{
+  position:relative;
+  padding-top:8px;
+}
+
+
+/* ===========================================================
+   分類按鈕
+   =========================================================== */
+.bar{padding:34px 0 20px;}
+
+.bar h2{
+  font-size:15px;
+  font-weight:500;
+  color:var(--muted);
+  margin:0 0 14px;
+  letter-spacing:.02em;
+}
+
+.chips{display:flex;gap:10px;flex-wrap:wrap;}
+
+.chip{
+  font-family:"Noto Sans TC",sans-serif;
+  font-size:15px;
+  font-weight:500;
+  padding:8px 20px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#fff;
+  color:var(--ink);
+  cursor:pointer;
+  box-shadow:0 2px 5px rgba(0,0,0,.06);
+}
+
+.chip[aria-pressed="true"]{
+  background:var(--purple);
+  color:#fff;
+  border-color:var(--purple);
+}
+
+.chip:focus-visible{outline:3px solid var(--soft);outline-offset:2px;}
+
+
+/* ===========================================================
+   影片卡片
+   =========================================================== */
+.grid{
+  display:grid;
+  gap:24px;
+  padding:10px 0 56px;
+  grid-template-columns:repeat(4,1fr);
+}
+
+@media(max-width:1000px){
+  .grid{grid-template-columns:repeat(2,1fr);}
+}
+
+@media(max-width:640px){
+  .grid{grid-template-columns:1fr;}
+}
+
+.card{
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  padding:0;
+  cursor:pointer;
+  overflow:hidden;
+  font:inherit;
+  color:inherit;
+}
+
+.card:focus-visible{outline:3px solid var(--soft);outline-offset:3px;}
+
+.thumb{
+  position:relative;
+  aspect-ratio:16/9;
+  background:var(--hero);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* 自己指定的封面圖（例如直式的履歷截圖）完整顯示，不裁切 */
+.thumb img.fit{object-fit:contain;background:#fff;}
+
+/* 沒有縮圖時顯示的替代插圖 */
+.thumb .fallback{
+  width:100%;
+  height:100%;
+  background:#fff url("0.png") center/contain no-repeat;
+}
+
+.play{
+  position:absolute;
+  left:12px;
+  bottom:12px;
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--purple);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.12);
+  transition:background .3s, color .3s;
+}
+
+.card:hover .play,
+.card:focus-visible .play{background:var(--purple);color:#fff;}
+
+.play svg{width:15px;height:15px;margin-left:2px;}
+
+.meta{padding:15px 17px 19px;}
+
+.meta .tag{
+  font-family:"Noto Sans TC",sans-serif;
+  font-size:12.5px;
+  font-weight:500;
+  color:var(--purple);
+  display:block;
+  margin-bottom:5px;
+}
+
+.meta h3{font-size:17px;font-weight:500;margin:0 0 6px;line-height:1.5;}
+.meta p{margin:0;font-size:14px;color:var(--muted);line-height:1.7;}
+
+
+/* ===========================================================
+   卡片區右側的看戲小人偶
+   ---------------------------------------------------------
+   不想要的話：刪掉 index.html 裡的 .watcher img
+   =========================================================== */
+.watcher{
+  position:absolute;
+  top:250px;             /* 加大＝往下 */
+  right:60px;            /* 加大＝往左 */
+  width:400px;           /* 加大＝變大 */
+  height:auto;
+  display:block;
+  pointer-events:none;
+  z-index:1;
+}
+
+/* 螢幕不夠寬就藏起來，不然會壓到卡片 */
+@media(max-width:1360px){
+  .watcher{display:none;}
+}
+
+
+/* ===========================================================
+   播放視窗
+   =========================================================== */
+dialog.player{
+  border:none;
+  padding:0;
+  background:transparent;
+  max-width:min(1160px,94vw);
+  width:100%;
+  overflow:visible;      /* 讓右側小圖可以超出框外 */
+}
+
+dialog.player::backdrop{background:rgba(76,76,109,.85);}
+
+.frame{
+  position:relative;
+  background:var(--ink);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:0 8px 30px rgba(0,0,0,.3);
+}
+
+.frame iframe{width:100%;border:0;display:block;}
+
+.frame-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:12px 14px 12px 18px;
+  color:#fff;
+  font-family:"Noto Sans TC",sans-serif;
+  font-size:16px;
+}
+
+.close{
+  font-family:"Noto Sans TC",sans-serif;
+  font-size:15px;
+  font-weight:bold;
+  background:#fff;
+  color:var(--purple);
+  border:none;
+  border-radius:999px;
+  padding:6px 16px;
+  cursor:pointer;
+  flex:0 0 auto;
+}
+
+.close:focus-visible{outline:3px solid var(--soft);outline-offset:2px;}
+
+/* 浮在播放框右側的小圖 */
+.player-side{
+  position:absolute;
+  right:calc(100% + 28px);   /* 貼在播放框右邊 28px 處 */
+  top:50%;
+  transform:translateY(-50%);
+  width:400px;
+  height:auto;
+  display:block;
+  pointer-events:none;
+}
+
+/* 螢幕不夠寬就藏起來，不然會被切掉 */
+@media(max-width:1900px){
+  .player-side{display:none;}
+}
+
+
+/* ===========================================================
+   頁尾
+   =========================================================== */
+footer{
+  border-top:1px solid var(--line);
+  padding:24px 0 40px;
+  font-size:15px;
+  color:var(--muted);
+  text-align:right;
+}
+
+footer a{color:var(--purple);}
+
+
+/* 使用者若在系統關閉動畫，就不播放任何過場 */
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important;}
+  html{scroll-behavior:auto;}
+}
