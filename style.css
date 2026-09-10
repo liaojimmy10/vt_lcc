@@ -186,6 +186,7 @@ h1,h2,h3{font-family:"Noto Sans TC", system-ui, sans-serif;}
   position:relative;
   height:56px;
   margin-top:-56px;      /* 往上疊回 hero 裡，讓小東西站在線上 */
+  width:100%;            /* body 是 flex，沒寫這行會被縮成 0 寬，小動物就不見了 */
   max-width:1180px;      /* 跟 .hero-inner 同寬 */
   margin-left:auto;      /* 置中，起訖點才會對齊左右兩張圖 */
   margin-right:auto;
