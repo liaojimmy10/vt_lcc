@@ -36,6 +36,10 @@ const VIDEOS = [
     title:"怎麼了（伴奏版）",
     desc:"有伴奏版 (全是感情 2.0)" },
 
+  { type:"yt", id:"J10Kq-DBK7I", tag:"模擬開台",
+    title:"RUKIMIN's Disappointing Adventure",
+    desc:"模擬未來開台遊玩遊戲的畫面、效果" },
+
   { type:"yt", id:"bernGE0eLxo", tag:"其他",
     title:"講笑話",
     desc:"哈哈哈，笑一個嘛~" },
@@ -93,6 +97,9 @@ const CARDS = [
 
   { r:"R", t:"系上冠軍",
     d:"傳說對決是大一跟朋友入坑的。高三的時候我還覺得玩傳說的都蠻屁孩，結果自己大一就變成那個屁孩，還一路打到系上比賽拿冠軍。" },
+
+  { r:"R", t:"一個人對著鏡頭講話",
+    d:"錄過一次 [模擬開台](RUKIMIN's Disappointing Adventure)，模擬了未來開台的畫面跟效果。想知道我一個人對著鏡頭是什麼樣子的話，可以看看。" },
 
   { r:"R", t:"日常生活",
     d:"在 WorldQuant BRAIN 當獨立研究顧問，研究量化交易策略、寫 Python 做自動化。今年七月拿到 Grandmaster，全球前 2% (拍手!)。" },
