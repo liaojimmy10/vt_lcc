@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>村檉 ｜ 面試結果通知</title>
+<meta name="description" content="請面試官簽核：錄取，或是不錄取（如果按得到的話）。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;900&family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="stage">
+
+  <!-- 面試結果單 -->
+  <section class="sheet" id="sheet" aria-labelledby="sheet-title">
+
+    <div class="sheet-head">
+      <div>
+        <h1 id="sheet-title">面試結果通知</h1>
+        <p class="sheet-no">編號: liaojimmy</p>
+      </div>
+      <!-- 證件照。圖放在上一層資料夾，所以路徑是 ../ -->
+      <img class="photo" src="../4.png" alt="村檉">
+    </div>
+
+    <dl class="fields">
+      <div class="field"><dt>應徵者</dt><dd>村檉</dd></div>
+      <div class="field"><dt>應徵項目</dt><dd>VTuber</dd></div>
+      <div class="field"><dt>專長</dt><dd>遊戲、雜談、唱歌、搞笑</dd></div>
+      <div class="field"><dt>備註</dt><dd>我怕我很搶手！ 快點回信給我！</dd></div>
+    </dl>
+
+    <div class="decision" id="decision">
+      <p class="decision-label">面試官簽核</p>
+      <div class="buttons" id="buttons">
+        <button class="btn btn-yes" id="yesBtn" type="button">錄取</button>
+        <button class="btn btn-no" id="noBtn" type="button">不錄取</button>
+      </div>
+      <!-- 按鈕逃跑時的碎碎念 -->
+      <p class="note" id="note" aria-live="polite">&nbsp;</p>
+    </div>
+
+    <!-- 蓋章。按下錄取才會出現 -->
+    <div class="stamp" id="stamp" aria-hidden="true">
+      <span>錄取</span>
+    </div>
+  </section>
+
+  <!-- 錄取之後才出現的區塊 -->
+  <section class="after" id="after" hidden>
+    <p class="after-text">謝謝面試官！那我們之後見囉 ٩(｡•ω•｡)و</p>
+    <div class="after-links">
+      <a href="mailto:liaojimmy05@gmail.com">寄信給我</a>
+      <a href="../">回作品集</a>
+    </div>
+    <button class="retry" id="retryBtn" type="button">再審核一次</button>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+/* ===========================================================
+   顏色設定 —— 跟作品集同一套，想改配色只要動這一區
+   =========================================================== */
+:root{
+  --ink:     #4c4c6d;   /* 深紫灰：內文 */
+  --purple:  #45b7cb;   /* 主色：錄取按鈕、標題 */
+  --purple-dark: #2e98ab; /* 主色深一階：滑上去、按下去 */
+  --paper:   #dff1f4;   /* 頁面底色：淡藍綠 */
+  --dot:     #bfe0e6;   /* 底色上的小圓點 */
+  --sheet:   #fbfaf5;   /* 結果單的紙色 */
+  --line:    #cfe6ea;   /* 邊框線、填寫線 */
+  --soft:    #bfe3ea;   /* focus 外框 */
+  --muted:   #7a7391;   /* 次要文字 */
+  --black:   #222222;   /* 簽核區的黑字 */
+  --seal:    #c23a3a;   /* 印章紅，只有蓋章用 */
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  min-height:100dvh;
+  background-color:var(--paper);
+  color:var(--ink);
+  font-family:"Noto Serif TC", Georgia, serif;
+  font-size:20px;
+  line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;     /* 按鈕逃跑時不要撐出橫向捲軸 */
+}
+
+.stage{
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:32px;
+  padding:40px 20px;
+}
+
+
+/* ===========================================================
+   結果單
+   =========================================================== */
+.sheet{
+  position:relative;
+  width:100%;
+  max-width:760px;
+  background:var(--sheet);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:52px 60px 44px;
+  box-shadow:0 1px 0 var(--line), 0 18px 40px -24px rgba(76,76,109,.45);
+}
+
+.sheet-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:28px;
+  padding-bottom:24px;
+  border-bottom:2px solid var(--ink);
+}
+
+.sheet h1{
+  margin:0;
+  font-family:"Noto Sans TC", system-ui, sans-serif;
+  font-weight:900;
+  font-size:clamp(32px,6vw,50px);
+  letter-spacing:.08em;
+  line-height:1.2;
+  color:var(--ink);
+}
+
+.sheet-no{
+  margin:8px 0 0;
+  font-size:17px;
+  color:var(--muted);
+}
+
+/* 右上角的人物圖：已經去背，所以不加框、不裁切，
+   寬高都不超過 200px，直的橫的圖都能自動縮放 */
+.photo{
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:200px;
+  max-height:200px;
+  flex:0 0 auto;
+}
+
+/* 表單欄位：標題 + 下底線，像手寫的申請表 */
+.fields{margin:24px 0 0;}
+
+.field{
+  display:grid;
+  grid-template-columns:5.5em 1fr;
+  gap:16px;
+  padding:14px 0;
+  border-bottom:1px dashed var(--line);
+}
+
+.field dt{
+  font-family:"Noto Sans TC", sans-serif;
+  font-size:17px;
+  font-weight:500;
+  color:var(--muted);
+  padding-top:3px;
+}
+
+.field dd{margin:0;font-weight:600;}
+
+
+/* ===========================================================
+   簽核區 + 兩顆按鈕
+   =========================================================== */
+.decision{
+  margin-top:40px;
+  text-align:center;
+}
+
+.decision-label{
+  margin:0 0 44px;       /* 跟按鈕的距離，錄取變更大的話這裡加大 */
+  font-size:17px;
+  color:var(--black);
+}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:22px;
+  min-height:80px;     /* 不錄取跑掉之後，這裡的高度不會塌下去 */
+}
+
+.btn{
+  font-family:"Noto Sans TC", sans-serif;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.1em;
+  padding:16px 44px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:transform .25s ease, background .2s, color .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.btn:focus-visible{outline:3px solid var(--soft);outline-offset:3px;}
+
+.btn-yes{
+  background:var(--purple);
+  color:#fff;
+  border:2px solid var(--purple);
+  transform:scale(var(--grow,1));   /* 不錄取逃越多次，錄取就越大 */
+}
+.btn-yes:hover{background:var(--purple-dark);border-color:var(--purple-dark);}
+.btn-yes:active,
+.btn-no.gave-up:active{background:var(--purple-dark);border-color:var(--purple-dark);}
+
+.btn-no{
+  background:#fff;
+  color:var(--ink);
+  border:2px solid var(--line);
+  white-space:nowrap;
+  z-index:50;
+}
+
+/* 逃跑中：脫離原本位置，自由移動（移動速度在 script.js 設定） */
+.btn-no.is-running{
+  position:fixed;
+  margin:0;
+}
+
+/* 放棄抵抗之後，變成第二顆錄取 */
+.btn-no.gave-up{
+  background:var(--purple);
+  color:#fff;
+  border-color:var(--purple);
+}
+
+.note{
+  margin:44px 0 0;       /* 跟按鈕的距離，錄取變更大的話這裡加大 */
+  min-height:1.8em;
+  font-size:18px;
+  color:var(--black);
+}
+
+
+/* ===========================================================
+   印章 —— 整頁唯一的大動作
+   =========================================================== */
+.stamp{
+  position:absolute;
+  right:70px;
+  bottom:64px;
+  width:180px;
+  height:180px;
+  display:grid;
+  place-items:center;
+  border:8px double var(--seal);
+  border-radius:12px;
+  color:var(--seal);
+  font-family:"Noto Serif TC", serif;
+  font-weight:900;
+  font-size:60px;
+  letter-spacing:.06em;
+  opacity:0;
+  transform:rotate(-14deg) scale(2.6);
+  pointer-events:none;
+  mix-blend-mode:multiply;
+}
+
+.stamp span{line-height:1;}
+
+.sheet.is-stamped .stamp{
+  animation:stamp .42s cubic-bezier(.3,1.6,.5,1) forwards;
+}
+.sheet.is-stamped{
+  animation:thud .3s ease .32s;
+}
+
+@keyframes stamp{
+  0%  {opacity:0;   transform:rotate(-14deg) scale(2.6);}
+  70% {opacity:.92; transform:rotate(-14deg) scale(.94);}
+  100%{opacity:.88; transform:rotate(-14deg) scale(1);}
+}
+
+@keyframes thud{
+  0%,100%{transform:translate(0,0);}
+  30%{transform:translate(2px,3px);}
+  60%{transform:translate(-2px,-1px);}
+}
+
+/* 蓋完章後，簽核區淡掉 */
+.sheet.is-stamped .decision{opacity:.35;pointer-events:none;transition:opacity .4s;}
+
+
+/* ===========================================================
+   錄取之後
+   =========================================================== */
+.after{
+  width:100%;
+  max-width:760px;
+  text-align:center;
+  animation:rise .5s ease both;
+}
+
+.thanks{
+  width:100%;
+  max-width:560px;
+  height:auto;
+  display:block;
+  margin:0 auto;
+  background:#fff;              /* 圖是白底，包成白卡片才不會像沒去背 */
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:8px;
+}
+
+.after-text{margin:20px 0 22px;}
+
+.after-links{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.after-links a{
+  font-family:"Noto Sans TC", sans-serif;
+  font-weight:500;
+  font-size:18px;
+  text-decoration:none;
+  color:var(--purple);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:12px 26px;
+  transition:background .2s, color .2s;
+}
+.after-links a:hover{background:var(--purple);color:#fff;}
+.after-links a:focus-visible,
+.retry:focus-visible{outline:3px solid var(--soft);outline-offset:2px;}
+
+.retry{
+  margin-top:18px;
+  background:none;
+  border:none;
+  font:inherit;
+  font-size:16px;
+  color:var(--muted);
+  text-decoration:underline;
+  cursor:pointer;
+}
+
+@keyframes rise{
+  from{opacity:0;transform:translateY(12px);}
+  to  {opacity:1;transform:none;}
+}
+
+
+/* ===========================================================
+   手機版
+   =========================================================== */
+@media(max-width:600px){
+  body{font-size:17px;}
+  .sheet{padding:28px 22px 26px;}
+  .sheet-no{font-size:14px;}
+  .photo{max-width:110px;max-height:110px;}
+  .field{grid-template-columns:4.8em 1fr;gap:12px;padding:10px 0;}
+  .field dt{font-size:14px;}
+  .decision-label{font-size:14px;margin-bottom:32px;}
+  .btn{font-size:18px;padding:12px 30px;}
+  .note{font-size:15px;margin-top:32px;}
+  .stamp{width:112px;height:112px;font-size:38px;border-width:6px;right:18px;bottom:40px;}
+  .after-links a{font-size:15px;padding:9px 18px;}
+}
+
+/* 系統設定「減少動態」的人：拿掉彈跳和震動 */
+@media(prefers-reduced-motion:reduce){
+  .btn{transition:none;}
+  .sheet.is-stamped{animation:none;}
+  .sheet.is-stamped .stamp{animation:none;opacity:.88;transform:rotate(-14deg);}
+  .after{animation:none;}
+}
