@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>村檉 ｜ 村檉概念股</title>
+<meta name="description" content="面試官專屬交易帳戶：VT1020 村檉，15 個交易日，買進賣出由你決定。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;900&family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="stage">
+
+  <!-- 交易單 -->
+  <section class="sheet" id="sheet" aria-labelledby="sheet-title">
+
+    <div class="sheet-head">
+      <div>
+        <h1 id="sheet-title">村檉概念股</h1>
+        <p class="sheet-no">代號: VT1020 ｜ 面試官專屬交易帳戶</p>
+      </div>
+      <!-- 右上角的圖。圖放在上一層資料夾，所以路徑是 ../ -->
+      <img class="photo" src="../4.png" alt="村檉">
+    </div>
+
+    <!-- 報價列 -->
+    <div class="quote">
+      <div class="quote-main">
+        <span class="quote-name">VT1020 村檉</span>
+        <span class="quote-price" id="price">100</span>
+        <span class="quote-chg" id="chg"></span>
+        <span class="quote-limit" id="limit" hidden></span>
+      </div>
+      <span class="quote-day" id="dayLabel"></span>
+    </div>
+
+    <!-- K 線圖（script.js 畫） -->
+    <div class="chart-box">
+      <svg class="chart" id="chart" role="img" aria-label="VT1020 村檉 K 線圖"></svg>
+    </div>
+
+    <!-- 今日新聞 -->
+    <div class="news" id="news" aria-live="polite">
+      <span class="news-tag">今日新聞</span>
+      <p class="news-text" id="newsText"></p>
+    </div>
+
+    <!-- 帳戶 -->
+    <dl class="account">
+      <div class="cell"><dt>現金</dt><dd id="cash"></dd></div>
+      <div class="cell"><dt>持股</dt><dd id="shares"></dd></div>
+      <div class="cell"><dt>總資產</dt><dd id="total"></dd></div>
+      <div class="cell"><dt>報酬率</dt><dd id="ret"></dd></div>
+    </dl>
+
+    <!-- 下單區 -->
+    <div class="decision" id="decision">
+      <p class="decision-label">面試官下單（以今日收盤價成交）</p>
+      <div class="buttons">
+        <button class="btn btn-buy"  id="buyBtn"  type="button">買進</button>
+        <button class="btn btn-hold" id="holdBtn" type="button">觀望</button>
+        <button class="btn btn-sell" id="sellBtn" type="button">賣出</button>
+      </div>
+      <p class="note" id="note" aria-live="polite">&nbsp;</p>
+    </div>
+
+    <!-- 收盤章。最後一天才會蓋 -->
+    <div class="stamp" id="stamp" aria-hidden="true">
+      <span>收盤</span>
+    </div>
+  </section>
+
+  <!-- 結算之後才出現的區塊 -->
+  <section class="after" id="after" hidden>
+    <p class="after-title" id="resultTitle"></p>
+    <div class="compare">
+      <div class="compare-cell">
+        <span>面試官的報酬</span>
+        <b id="myRet"></b>
+      </div>
+      <div class="compare-cell">
+        <span>第一天買進抱到最後</span>
+        <b id="holdRet"></b>
+      </div>
+    </div>
+    <p class="after-text" id="resultText"></p>
+    <div class="after-links">
+      <a href="mailto:liaojimmy05@gmail.com">寄信給我</a>
+      <a href="../game/index.html">面試官審核</a>
+      <a href="../">回作品集</a>
+    </div>
+    <button class="retry" id="retryBtn" type="button">重新開盤</button>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
