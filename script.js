@@ -17,9 +17,13 @@
    ========================================================= */
 const VIDEOS = [
   { type:"yt", id:"9EDGN0qlvYQ", tag:"自我介紹",
-    title:"自我介紹",
-    desc:"綽號、個性、學經歷、遊戲小插曲" },
-
+     title:"自我介紹 - 本音",
+     desc:"綽號、個性、學經歷、遊戲小插曲" },
+   
+  { type:"yt", id:"cLKKJbj2W5I", tag:"自我介紹",
+     title:"自我介紹 - 擬音",
+     desc:"同一段自我介紹，換成擬音的聲線" },
+   
   { type:"yt", id:"Y9oftrjERn0", tag:"遊戲",
     title:"Valorant 搞笑日常",
     desc:"外掛爭議、左右不分、隊友崩潰" },
