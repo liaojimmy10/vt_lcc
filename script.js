@@ -17,8 +17,8 @@
    ========================================================= */
 const VIDEOS = [
   { type:"yt", id:"9EDGN0qlvYQ", tag:"自我介紹",
-    title:"自我介紹 - 本音",
-    desc:"綽號、個性、學經歷、遊戲小插曲" },
+  title:"自我介紹 - 本音",
+  desc:"綽號、個性、學經歷、遊戲小插曲" },
 
   { type:"yt", id:"cLKKJbj2W5I", tag:"自我介紹",
     title:"自我介紹 - 擬音",
@@ -40,9 +40,17 @@ const VIDEOS = [
     title:"怎麼了（伴奏版）",
     desc:"有伴奏版 (全是感情 2.0)" },
 
+  { type:"yt", id:"Naa4MjIKtQI", tag:"舞蹈",
+    title:"少年之名 主題曲",
+    desc:"自學的舞蹈翻跳" },
+
   { type:"yt", id:"J10Kq-DBK7I", tag:"模擬開台",
     title:"RUKIMIN's Disappointing Adventure",
     desc:"模擬未來開台遊玩遊戲的畫面、效果" },
+    
+  { type:"yt", id:"1ZcLYcLUhZ8", tag:"其他",
+    title:"面試官請小心，這個人會丟斧頭",
+    desc:"隱藏技能大公開：跳舞 × 丟斧頭" },
 
   { type:"yt", id:"bernGE0eLxo", tag:"其他",
     title:"講笑話",
